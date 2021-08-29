@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  postgis:
+    image: ruzzolone:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${PG_USER:-tegola}
+      - POSTGRES_PASSWORD=${PG_PASS:-secret}
+    healthcheck:
+      test: ["CMD", "psql", "-h", "db", "-U", "${POSTGRES_USER}", "-c", "SELECT 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  tegola:
+    image: gospatial/tegola:v0.13.0
+    volumes:
+      - ./config.toml:/opt/tegola_config/config.toml
+    entrypoint: /opt/tegola serve --config /opt/tegola_config/config.toml
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    depends_on:
+      - "postgis"
