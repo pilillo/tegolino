@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   postgis:
-    image: ruzzolone:latest
+    image: ruzzolone-tegola:latest
     ports:
       - "5432:5432"
     environment:
