@@ -7,11 +7,6 @@ services:
     environment:
       - POSTGRES_USER=${PG_USER:-tegola}
       - POSTGRES_PASSWORD=${PG_PASS:-secret}
-    healthcheck:
-      test: ["CMD", "psql", "-h", "db", "-U", "${POSTGRES_USER}", "-c", "SELECT 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
   tegola:
     image: gospatial/tegola:v0.13.0
     volumes:
@@ -22,3 +17,11 @@ services:
     restart: on-failure
     depends_on:
       - "postgis"
+  ui:
+    image: nginx:1.19.8-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+    depends_on:
+      - tegola

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!--<link rel="stylesheet" href="https://openlayers.org/en/v4.5.0/css/ol.css" type="text/css">-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/css/ol.css">
+        <style>
+            #map{height:600px;width:100%;}
+        </style>
+        <!--<script src="https://openlayers.org/en/v4.5.0/build/ol.js" type="text/javascript"></script>-->
+        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js" type="text/javascript"></script>
+        <!--<script src="olms.js" type="text/javascript"></script>-->
+        <script src="https://unpkg.com/ol-mapbox-style@3.6.2/dist/olms.js" type="text/javascript"></script>
+        <title>OpenLayers example</title>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script type="text/javascript">
+            olms.apply('map','http://localhost/hot-osm-starter.json');
+        </script>
+    </body>
+</html>
